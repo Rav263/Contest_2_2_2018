@@ -15,9 +15,28 @@ CMAIN:
   GET_DEC 4, [m]
   GET_DEC 4, [k]
 
+  MOV ECX, DWORD[n]
+  IMUL ECX, DWORD[m]
+
+  MOV EAX, 0
+
   l1:
-    l2:
-      
+    GET_DEC 4, [a + EAX]
+    ADD EAX, 1
+  loop l1
+
+  MOV ECX, DWORD[m]
+  IMUL ECX, DWORD[k]
+
+  MOV EAX, 0
+
+  l2:
+    GET_DEC 4, [b + EAX]
+    ADD EAX, 1
+  loop l2
+
+
+
 
   MOV EAX, 0
   RET
