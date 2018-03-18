@@ -10,18 +10,21 @@ section .bss
 section .text
 global CMAIN:
 CMAIN:
-  GET_DEC 4, [n]
-  GET_DEC 4, [k]
+  GET_UDEC 4, [n]
+  GET_UDEC 4, [k]
   MOV EAX, DWORD[n]
 
   cmp EAX, DWORD[k]
   jle endall
+  ;cmp EAX, 0
+  ;jl endall
+  ;cmp DWORD[k], 0
+  ;jl endall
+
 
 
   MOV DWORD[res], 0
   MOV EDI, 32
-  
-
 
   top1:
     DEC EDI
@@ -92,6 +95,13 @@ CMAIN:
     jnz top2
     jz endall
   cnk:
+  cmp EAX, 0
+  jge stq
+  MOV EAX, 0
+  jmp endcnk
+
+  stq:
+  
   CMP EBX, 0
   jnz start
   MOV EAX, 1
@@ -117,7 +127,7 @@ CMAIN:
   jmp endcnk
 
   endall:
-  PRINT_DEC 4, [res]
+  PRINT_UDEC 4, [res]
   NEWLINE
   MOV EAX, 0
 ret
